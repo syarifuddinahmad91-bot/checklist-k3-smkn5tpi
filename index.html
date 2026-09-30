@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checklist K3 Operasional - SMKN S Tanjungpinang</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    :root {
+      --primary: #003366;
+      --secondary: #2c3e50;
+      --bg: #f4f7f9;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 10px;
+      background-color: var(--bg);
+      color: #333;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      box-sizing: border-box;
+    }
+    .header-title {
+      text-align: center;
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+      page-break-inside: avoid;
+    }
+    .header-title h2 {
+      margin: 0;
+      font-size: 15px;
+      color: var(--primary);
+      text-transform: uppercase;
+    }
+    .header-title h3 {
+      margin: 4px 0 0 0;
+      font-size: 13px;
+      color: #555;
+    }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-size: 11px;
+      page-break-inside: avoid;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .form-group label {
+      font-weight: bold;
+      margin-bottom: 3px;
+      color: #444;
+    }
+    .form-group input, .form-group select {
+      padding: 6px 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 12px;
+      box-sizing: border-box;
+    }
+    .instruction-box {
+      background: #eef6ff;
+      border-left: 4px solid var(--primary);
+      padding: 8px 12px;
+      font-size: 11px;
+      margin-bottom: 12px;
+      page-break-inside: avoid;
+    }
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 12px;
+      font-size: 10.5px;
+    }
+    th, td {
+      border: 1px solid #aaa;
+      padding: 5px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background-color: #f0f4f8;
+      color: #111;
+      text-align: center;
+    }
+    thead {
+      display: table-header-group;
+    }
+    tr {
+      page-break-inside: avoid !important;
+      break-inside: avoid !important;
+    }
+    .section-header {
+      background-color: #d9e2ec;
+      font-weight: bold;
+      color: #102a43;
+      page-break-inside: avoid !important;
+    }
+    .text-center { text-align: center; }
+    .catatan-input {
+      width: 95%;
+      padding: 4px;
+      font-size: 10.5px;
+      border: 1px solid #ddd;
+      box-sizing: border-box;
+    }
+    .summary-table {
+      width: 100%;
+      margin-top: 10px;
+      font-size: 11px;
+      page-break-inside: avoid !important;
+      break-inside: avoid !important;
+    }
+    .summary-table td {
+      padding: 5px 10px;
+    }
+    .btn-container {
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .btn {
+      background: #27ae60;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .btn:hover { background: #219150; }
+
+    /* Aturan Cetak Bawaan Browser */
+    @media print {
+      .btn-container { display: none; }
+      body { background: #fff; padding: 0; }
+      .container { box-shadow: none; padding: 0; max-width: 100%; }
+      tr, .summary-table, .instruction-box { page-break-inside: avoid !important; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container" id="pdf-content">
+  <div class="header-title">
+    <h2>LEMBAR OBSERVASI & CHECKLIST K3 OPERASIONAL</h2>
+    <h3>(SAFETY & PROCEDURE CHECKLIST)</h3>
+    <div style="font-size:11px; font-weight:bold; margin-top:4px;">SMK NEGERI S TANJUNGPINANG - TEKNIK KAPAL NIAGA</div>
+  </div>
+
+  <div class="meta-grid">
+    <div class="form-group">
+      <label>Mata Pelajaran & Unit:</label>
+      <input type="text" value="Perawatan & Perbaikan Permesinan Kapal | Mesin Diesel Dongfeng 7 PK" readonly>
+    </div>
+    <div class="form-group">
+      <label>Kelompok / Kelas:</label>
+      <input type="text" id="kelompok" placeholder="Contoh: Kelompok 1 / XI TKN">
+    </div>
+    <div class="form-group">
+      <label>Nama Observer K3:</label>
+      <input type="text" id="observer" placeholder="Nama Observer">
+    </div>
+    <div class="form-group">
+      <label>Nama Operator (Pelaksana):</label>
+      <input type="text" id="operator" placeholder="Nama Operator">
+    </div>
+    <div class="form-group">
+      <label>Unit Mesin / Stasiun:</label>
+      <input type="text" id="stasiun" value="Dongfeng 7 PK">
+    </div>
+    <div class="form-group">
+      <label>Tanggal & Waktu:</label>
+      <input type="datetime-local" id="tanggal">
+    </div>
+  </div>
+
+  <div class="instruction-box">
+    <strong>PETUNJUK OPERASIONAL OBSERVER K3:</strong><br>
+    1. Bacalah setiap instruksi kerja langkah demi langkah sebelum dan selama Operator bekerja.<br>
+    2. Pastikan Operator menjalankan urutan prosedur teknis dan keselamatan kerja (K3) secara disiplin.<br>
+    3. Berikan nilai pada Kolom Hasil: pilih <strong>'1'</strong> jika SESUAI/YA, atau <strong>'0'</strong> jika TIDAK SESUAI/TIDAK.
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 4%;">No</th>
+          <th style="width: 22%;">Tahapan & Kriteria Observasi K3/SOP</th>
+          <th style="width: 32%;">Instruksi Kerja Langkah Demi Langkah</th>
+          <th style="width: 24%;">Standar Keselamatan & Kinerja</th>
+          <th style="width: 8%;">Hasil<br>(1=Ya, 0=Tidak)</th>
+          <th style="width: 10%;">Catatan Observasi Khusus</th>
+        </tr>
+      </thead>
+      <tbody id="checklist-body">
+        <!-- Data item diisi oleh JavaScript -->
+      </tbody>
+    </table>
+  </div>
+
+  <table class="summary-table">
+    <tr>
+      <td style="width:60%; font-weight:bold;">JUMLAH ITEM DIPERIKSA</td>
+      <td style="width:40%; text-align:right;" id="total-item">18</td>
+    </tr>
+    <tr>
+      <td style="font-weight:bold;">JUMLAH PROSEDUR SESUAI (KATEGORI YA = 1)</td>
+      <td style="text-align:right; font-weight:bold; color:green;" id="total-ya">0</td>
+    </tr>
+    <tr>
+      <td style="font-weight:bold;">PERSENTASE KEPATUHAN K3 & SOP (%)</td>
+      <td style="text-align:right; font-weight:bold;" id="persentase">0%</td>
+    </tr>
+    <tr>
+      <td style="font-weight:bold;">STATUS KELAYAKAN K3 & OPERASIONAL</td>
+      <td style="text-align:right; font-weight:bold;" id="status-kelayakan">-</td>
+    </tr>
+  </table>
+</div>
+
+<div class="btn-container">
+  <button class="btn" onclick="generatePDF()">Simpan & Unduh PDF</button>
+</div>
+
+<script>
+  const itemsData = [
+    { cat: "PERSIAPAN K3 & APD SEBELUM KERJA (PRE-OPERATION SAFETY)", items: [
+      { no: 1, kriteria: "Pemeriksaan APD Lengkap Operator", instruksi: "Membaca instruksi APD dan memeriksa kelengkapan wearpack, sepatu safety, dan pelindung telinga (ear plug).", standar: "Operator memakai APD lengkap dan rapi sebelum mendekati unit mesin." },
+      { no: 2, kriteria: "Inspeksi Visual Area Kerja Bengkel", instruksi: "Memeriksa kondisi lantai di sekitar mesin dari ceceran oli, air, atau benda berbahaya.", standar: "Area lantai di sekitar mesin bersih, kering, dan bebas bahaya tersandung." },
+      { no: 3, kriteria: "Pembacaan Instruksi Kerja (Job Sheet)", instruksi: "Membaca dan memahami urutan langkah kerja penyetelan katup Dongfeng 7 PK bersama tim.", standar: "Operator mampu menjelaskan tahapan kerja utama sebelum menyentuh peralatan." },
+      { no: 4, kriteria: "Prosedur Lockout & Isolasi Mesin", instruksi: "Memastikan mesin mati total, tuas dekompresi aman, dan memasang penanda 'Mesin Dalam Perbaikan'.", standar: "Mesin tidak dapat berputar tak terduga dan penanda K3 terpasang." },
+      { no: 5, kriteria: "Persiapan & Penataan Tools", instruksi: "Menyiapkan feeler gauge, kunci ring/pas, obeng, dan kain majun di atas meja kerja/papan alat.", standar: "Tools tertata rapi, bersih, dan tidak berserakan di atas badan mesin." }
+    ]},
+    { cat: "PELAKSANAAN PROSEDUR TEKNIS & K3 SAAT PRAKTIK (OPERATIONAL SAFETY)", items: [
+      { no: 6, kriteria: "Pelepasan Penutup Katup (Rocker Cover)", instruksi: "Membuka baut penutup katup menggunakan kunci yang pas secara perlahan dan hati-hati.", standar: "Kunci tidak tergelincir, baut disimpan di wadah komponen (baki alat)." },
+      { no: 7, kriteria: "Penentuan Posisi Top Kompresi (TMA)", instruksi: "Memutar poros engkol dengan engkol pemutar secara perlahan sambil mengamati pergerakan katup.", standar: "Posisi berdiri Operator stabil, engkol dipegang mantap dan posisi TMA tepat." },
+      { no: 8, kriteria: "Pencegahan Bahaya Jepitan (Pinch Point)", instruksi: "Memastikan jari dan tangan tidak berada di area jepitan antara rocker arm, katup, dan pegas.", standar: "Tangan Operator berada pada jarak aman dari komponen bergerak." },
+      { no: 9, kriteria: "Pemilihan & Penggunaan Feeler Gauge", instruksi: "Membaca spesifikasi celah katup manual Dongfeng 7 PK dan memilih plat feeler gauge yang presisi.", standar: "Plat ukur dipilih sesuai spesifikasi, tidak ditarik paksa hingga terlipat." },
+      { no: 10, kriteria: "Teknik Penyetelan Baut & Mur Pengunci", instruksi: "Kunci pas menahan mur pengunci (lock nut) sementara obeng memutar baut penyetel (adjusting screw).", standar: "Penggunaan dua alat dilakukan secara stabil tanpa menggores komponen lain." },
+      { no: 11, kriteria: "Pengukuran Celah & Kepekaan Rasa", instruksi: "Menyisipkan plat feeler gauge secara lurus dan merasakan gesekan hambatan ringan (light drag).", standar: "Posisi plat lurus/rata, tidak miring, dan tingkat kekencangan pas." },
+      { no: 12, kriteria: "Penguncian & Pemeriksaan Ulang (Re-check)", instruksi: "Mengencangkan mur pengunci kembali sambil menahan baut penyetel, lalu mengukur ulang dengan feeler.", standar: "Celah katup tidak berubah setelah mur pengunci dikencangkan sempurna." },
+      { no: 13, kriteria: "Fokus Kerja & Komunikasi Teknis", instruksi: "Memastikan Operator fokus bekerja, tidak bersenda gurau, dan berkomunikasi efektif dengan tim.", standar: "Suasana kerja tenang, disiplin K3 terjaga, dan terjadi koordinasi efektif." }
+    ]},
+    { cat: "PASCA OPERASI & HOUSEKEEPING BENGKEL (POST-OPERATION SAFETY)", items: [
+      { no: 14, kriteria: "Verifikasi Kebersihan Dalam Mekanisme", instruksi: "Memeriksa kembali area rocker arm agar bebas dari kain majun, ceceran kotoran, atau alat tertinggal.", standar: "Tidak ada benda asing yang tertinggal di dalam area mekanisme katup." },
+      { no: 15, kriteria: "Pemasangan Kembali Penutup Katup", instruksi: "Memasang gasket dan penutup katup, mengencangkan baut secara bertahap dan merata.", standar: "Penutup terpasang rapat, tidak miring, dan baut dikencangkan sesuai momen." },
+      { no: 16, kriteria: "Pembersihan Peralatan Ukur & Hand Tools", instruksi: "Membersihkan plat feeler gauge dan seluruh kunci menggunakan kain majun bersih dari sisa oli.", standar: "Peralatan bersih, tidak berminyak, dan plat feeler gauge diolesi pelindung." },
+      { no: 17, kriteria: "Pengembalian Tools & Housekeeping Floor", instruksi: "Mengembalikan seluruh tools ke tempat semula dan membersihkan area lantai bengkel.", standar: "Papan tools lengkap, area kerja bersih, dan sampah dibuang pada tempatnya." },
+      { no: 18, kriteria: "Pelepasan Penanda K3 & Reporting", instruksi: "Melepas papan penanda 'Mesin Dalam Perbaikan' dan melaporkan hasil praktik kepada Instruktur/Guru.", standar: "Laporan operasional diserahkan dan status keselamatan terverifikasi." }
+    ]}
+  ];
+
+  function renderTable() {
+    const tbody = document.getElementById('checklist-body');
+    tbody.innerHTML = '';
+
+    itemsData.forEach(section => {
+      const catRow = document.createElement('tr');
+      catRow.className = 'section-header';
+      catRow.innerHTML = `<td colspan="6">${section.cat}</td>`;
+      tbody.appendChild(catRow);
+
+      section.items.forEach(item => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td class="text-center">${item.no}</td>
+          <td><strong>${item.kriteria}</strong></td>
+          <td>${item.instruksi}</td>
+          <td>${item.standar}</td>
+          <td class="text-center">
+            <select class="hasil-select" onchange="calculateScore()">
+              <option value="0">0</option>
+              <option value="1">1</option>
+            </select>
+          </td>
+          <td><input type="text" class="catatan-input" placeholder="-"></td>
+        `;
+        tbody.appendChild(row);
+      });
+    });
+  }
+
+  function calculateScore() {
+    const selects = document.querySelectorAll('.hasil-select');
+    let totalYa = 0;
+    selects.forEach(select => {
+      if (select.value === "1") totalYa++;
+    });
+
+    const totalItem = 18;
+    const percentage = Math.round((totalYa / totalItem) * 100);
+
+    document.getElementById('total-ya').innerText = totalYa;
+    document.getElementById('persentase').innerText = percentage + '%';
+
+    const statusElem = document.getElementById('status-kelayakan');
+    if (percentage >= 85) {
+      statusElem.innerText = 'SANGAT LAYAK / MEMENUHI SYARAT K3';
+      statusElem.style.color = 'green';
+    } else if (percentage >= 70) {
+      statusElem.innerText = 'CUKUP LAYAK (PERLU EVALUASI)';
+      statusElem.style.color = 'orange';
+    } else {
+      statusElem.innerText = 'TIDAK LAYAK / PERLU REMEDIAL';
+      statusElem.style.color = 'red';
+    }
+  }
+
+  async function generatePDF() {
+    const originalElement = document.getElementById('pdf-content');
+    
+    // Clone element agar tidak mengganggu tampilan form interaktif di layar HP
+    const element = originalElement.cloneNode(true);
+
+    // Salin nilai input & select dari DOM asli ke DOM clone
+    const originalInputs = originalElement.querySelectorAll('input, select');
+    const clonedInputs = element.querySelectorAll('input, select');
+
+    originalInputs.forEach((input, idx) => {
+      const cloned = clonedInputs[idx];
+      if (input.tagName === 'SELECT') {
+        const span = document.createElement('span');
+        span.innerText = input.value;
+        span.style.fontWeight = 'bold';
+        cloned.parentNode.replaceChild(span, cloned);
+      } else if (input.tagName === 'INPUT') {
+        const span = document.createElement('span');
+        let val = input.value;
+        if (input.type === 'datetime-local' && val) {
+          val = new Date(val).toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' });
+        }
+        span.innerText = val || '-';
+        span.style.display = 'inline-block';
+        span.style.borderBottom = '1px solid #777';
+        span.style.width = '95%';
+        cloned.parentNode.replaceChild(span, cloned);
+      }
+    });
+
+    // Format lebar clone ke standar A4 agar tidak ikut menyusut seperti di layar HP
+    element.style.width = '790px';
+    element.style.padding = '15px';
+    element.style.background = '#ffffff';
+    element.style.boxSizing = 'border-box';
+
+    // Letakkan clone secara tersembunyi untuk proses pembuatan PDF
+    const container = document.createElement('div');
+    container.style.position = 'absolute';
+    container.style.left = '-9999px';
+    container.style.top = '0';
+    container.style.width = '800px';
+    container.appendChild(element);
+    document.body.appendChild(container);
+
+    const operatorName = document.getElementById('operator').value || 'Siswa';
+    
+    const opt = {
+      margin:       [8, 8, 8, 8], // atas, kiri, bawah, kanan (mm)
+      filename:     `Checklist_K3_${operatorName.replace(/\s+/g, '_')}.pdf`,
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { 
+        scale: 2, 
+        useCORS: true, 
+        scrollY: 0,
+        scrollX: 0,
+        windowWidth: 1024
+      },
+      jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      pagebreak:    { mode: ['avoid-all', 'css', 'legacy'], avoid: ['tr', '.summary-table', '.header-title', '.instruction-box', '.meta-grid'] }
+    };
+
+    try {
+      await html2pdf().set(opt).from(element).save();
+    } finally {
+      document.body.removeChild(container);
+    }
+  }
+
+  window.onload = function() {
+    renderTable();
+    const now = new Date();
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+    document.getElementById('tanggal').value = now.toISOString().slice(0, 16);
+  };
+</script>
+</body>
+</html>
